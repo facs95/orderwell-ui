@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn {
+        @apply w-full px-4 py-2 text-white tracking-wider transition-all duration-150 ease-linear shadow outline-none bg-blue-500 hover:bg-blue-600 hover:shadow-lg focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+    .btn-transparent {
+        @apply bg-white text-blue-500 border border-blue-500 hover:border-blue-600 hover:bg-white hover:shadow-sm;
+    }
+    .btn-sm {
+        @apply px-2 py-0 text-sm;
+    }
+}
