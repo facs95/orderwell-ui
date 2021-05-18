@@ -2,8 +2,8 @@ import firebaseClient from "firebase/app";
 import "firebase/auth";
 
 const CLIENT_CONFIG = {
-    apiKey: "AIzaSyBhPmE5vYJgvw0kF1lScuhRyNqw04olAgo",
-    authDomain: "orderwell-dev.firebaseapp.com",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
 };
 
 firebaseClient.initializeApp(CLIENT_CONFIG);
