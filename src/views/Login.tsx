@@ -47,7 +47,7 @@ export const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <button
-                        disabled={disableButton}
+                        disabled={disableButton || loading}
                         type="submit"
                         className="btn mt-3"
                     >

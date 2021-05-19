@@ -7,9 +7,10 @@ import {
     getEmployeesPath,
     GET_EMPLOYEE_QUERY,
 } from "../queries/employees";
+import { getOrdersPath, GET_ORDERS_QUERY, ORDERS_DATA } from "../queries/orders";
 
 export const Dashboard = () => {
-    const { data } = useAuthenticatedQuery<EMPLOYEES_DATA>(
+    const { data: employees } = useAuthenticatedQuery<EMPLOYEES_DATA>(
         GET_EMPLOYEE_QUERY,
         getEmployeesPath,
         {
@@ -17,11 +18,20 @@ export const Dashboard = () => {
         }
     );
 
-    console.log("data2", data);
+    const { data:orders } = useAuthenticatedQuery<ORDERS_DATA>(
+        GET_ORDERS_QUERY,
+        getOrdersPath,
+        {
+            refetchOnWindowFocus: false,
+        }
+    );
+
+    console.log("employess", employees);
+    console.log("orders", orders);
 
     const { user, logoutUser } = useAuth();
 
-    console.log("user", user);
+    console.log("user", user?.uid);
 
     return (
         <div>

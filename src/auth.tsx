@@ -26,10 +26,12 @@ interface Props {
     children: React.ReactNode;
 }
 
+export const TOKEN_NAME = "token";
+
 export const AuthProvider = ({ children }: Props) => {
     const [user, setUser] = useState<firebaseClient.User | null>(null);
     const [userLoding, setUserLoading] = useState(true);
-    const [, setCookie] = useCookies(["token"]);
+    const [, setCookie] = useCookies([TOKEN_NAME]);
 
     const { data, isLoading, isError } = useQuery<TENANT_ID_DATA>(
         TENANT_ID_QUERY,
@@ -51,14 +53,14 @@ export const AuthProvider = ({ children }: Props) => {
     useEffect(() => {
         return firebaseClient.auth().onIdTokenChanged(async (user) => {
             if (!user) {
-                setUser(null);
                 setCookie("token", "", { path: "/" });
+                setUser(null);
             } else {
                 const token = await user.getIdToken();
-                setUser(user);
                 setCookie("token", token, { path: "/" });
+                setUser(user);
             }
-            setUserLoading(false);
+            setUserLoading(false)
         });
     }, [setCookie]);
 
@@ -90,8 +92,6 @@ export const useAuth = () => {
 
     const { user, tenantId } = context;
 
-    const history = useHistory();
-
     const auth = useMemo(() => {
         if (tenantId) {
             firebaseClient.auth().tenantId = tenantId;
@@ -101,7 +101,6 @@ export const useAuth = () => {
 
     const loginUser = async (email: string, pass: string) => {
         await auth.signInWithEmailAndPassword(email, pass);
-        history.push("/");
     };
 
     const logoutUser = () => {
