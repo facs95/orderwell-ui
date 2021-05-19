@@ -12,7 +12,6 @@ import {
     TENANT_ID_DATA,
     TENANT_ID_QUERY,
 } from "./queries/tenant";
-import { useHistory } from "react-router";
 import { queryFunction, redirectToPublic } from "./utils/helpers";
 import { useCookies } from "react-cookie";
 
