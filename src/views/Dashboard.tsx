@@ -7,7 +7,6 @@ import {
     getEmployeesPath,
     GET_EMPLOYEE_QUERY,
 } from "../queries/employees";
-import { getOrdersPath, GET_ORDERS_QUERY, ORDERS_DATA } from "../queries/orders";
 
 export const Dashboard = () => {
     const { data: employees } = useAuthenticatedQuery<EMPLOYEES_DATA>(
@@ -18,26 +17,15 @@ export const Dashboard = () => {
         }
     );
 
-    const { data:orders } = useAuthenticatedQuery<ORDERS_DATA>(
-        GET_ORDERS_QUERY,
-        getOrdersPath,
-        {
-            refetchOnWindowFocus: false,
-        }
-    );
-
     console.log("employess", employees);
-    console.log("orders", orders);
 
-    const { user, logoutUser } = useAuth();
-
-    console.log("user", user?.uid);
+    const { logoutUser } = useAuth();
 
     return (
         <div>
             Dashboard
             <p></p>
-            <Link to="/orders">Orders</Link>
+            <Link to="/orders">Go to orders</Link>
             <p></p>
             <button onClick={logoutUser}>Logout</button>
         </div>

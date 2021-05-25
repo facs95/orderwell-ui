@@ -4,7 +4,14 @@ export function sleep(ms: number) {
 
 export function redirectToPublic() {
     window.location.href =
-        process.env.REACT_APP_UI_BASE_URL || "http://localhost:3000";
+        "http://" + process.env.REACT_APP_UI_BASE_URL ||
+        "http://localhost:3000";
+}
+
+export function redirectToTenant(subDomain: string) {
+    window.location.href =
+        `http://${subDomain}.${process.env.REACT_APP_UI_BASE_URL}` ||
+        "http://localhost:3000";
 }
 
 //Handles fetch request
@@ -15,7 +22,7 @@ export const queryFunction = async (url: string, token?: string) => {
         headers.append("Content-Type", "application/json");
     }
     const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}${url}`,
+        `http://${process.env.REACT_APP_API_BASE_URL}${url}`,
         { headers }
     );
     if (!response.ok) {
@@ -23,3 +30,7 @@ export const queryFunction = async (url: string, token?: string) => {
     }
     return response.json();
 };
+
+export function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}

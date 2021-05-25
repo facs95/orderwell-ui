@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { AuthProvider } from "./auth";
 import { TenantRoutes } from "./TenantRoutes";
 import { redirectToPublic } from "./utils/helpers";
-import { CreateAccount } from "./views/CreateAccount";
+import { CreateTenant } from "./views/CreateTenant";
 
 function App() {
     const hostArray = useMemo(() => {
@@ -29,7 +29,7 @@ function App() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" component={() => <CreateAccount />} />
+                <Route path="/" component={() => <CreateTenant />} />
                 <Redirect to="/" />
             </Switch>
         </BrowserRouter>

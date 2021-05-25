@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes } from "react";
-import { BiLoaderAlt } from "react-icons/bi";
+import { LoadableButton } from "./LoadableButton";
 import { Input } from "./Input";
 
 interface Props {
@@ -26,20 +26,15 @@ export const CheckAvailableInput = ({
             </label>
             <div className="flex flex-nowrap">
                 <Input placeholder={label} {...args} />
-                <button
+                <LoadableButton
+                    {...{ loading }}
                     disabled={!value}
                     onClick={onCheck}
                     type="button"
-                    className="btn btn-transparent btn-sm w-32 ml-2"
+                    className="btn-transparent btn-sm w-32 ml-2"
                 >
-                    {loading ? (
-                        <span className="flex justify-center">
-                            <BiLoaderAlt className="animate-spin h-5 w-5" />
-                        </span>
-                    ) : (
-                        "Check"
-                    )}
-                </button>
+                    Check
+                </LoadableButton>
             </div>
         </div>
     );

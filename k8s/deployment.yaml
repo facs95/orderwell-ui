@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ui
+  name: ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ui
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ui
+    spec:
+      containers:
+      - image: ui
+        imagePullPolicy: Never
+        name: ui
+        resources: {}
+        envFrom:
+        - secretRef:
+            name: ui-dev-secret
+        ports:
+          - containerPort: 30
+            protocol: TCP
+status: {}

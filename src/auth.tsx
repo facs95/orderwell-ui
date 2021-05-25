@@ -47,6 +47,16 @@ export const AuthProvider = ({ children }: Props) => {
         }
     }, [isError, isLoading]);
 
+    // //Sign user out if it does not belong to this tenant
+    // useEffect(() => {
+    //     if (user && data) {
+    //         if (user.tenantId !== data.oauth_id) {
+    //             firebaseClient.auth().tenantId = data.oauth_id;
+    //             firebaseClient.auth().signOut()
+    //         }
+    //     }
+    // }, [user, data]);
+
     // listen for token changes
     // call setUser and write new token as a cookie
     useEffect(() => {
@@ -59,7 +69,7 @@ export const AuthProvider = ({ children }: Props) => {
                 setCookie("token", token, { path: "/" });
                 setUser(user);
             }
-            setUserLoading(false)
+            setUserLoading(false);
         });
     }, [setCookie]);
 
@@ -77,7 +87,12 @@ export const AuthProvider = ({ children }: Props) => {
     if (isLoading || userLoding || isError) return <div>Loading...</div>;
 
     return (
-        <AuthContext.Provider value={{ user, tenantId: data?.oauth_id ?? "" }}>
+        <AuthContext.Provider
+            value={{
+                user,
+                tenantId: data?.oauthId ?? "",
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );
