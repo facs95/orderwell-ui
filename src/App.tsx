@@ -1,22 +1,20 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { AuthProvider } from "./auth";
+import { useGetSubDomain } from "./hooks/useGetSubDomain";
 import { TenantRoutes } from "./TenantRoutes";
 import { redirectToPublic } from "./utils/helpers";
 import { CreateTenant } from "./views/CreateTenant";
 
 function App() {
-    const hostArray = useMemo(() => {
-        const { host } = window.location;
-        return host.split(".");
-    }, []);
+    const { isValid, subDomain } = useGetSubDomain();
 
-    if (hostArray.length > 2) {
+    if (!isValid) {
         redirectToPublic();
     }
 
     //Its on subdomain so we take them to the tenant routes
-    if (hostArray.length === 2) {
+    if (subDomain) {
         return (
             <BrowserRouter>
                 <AuthProvider>
