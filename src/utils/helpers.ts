@@ -14,7 +14,7 @@ export function redirectToTenant(subDomain: string) {
 export function getWWWDomain() {
     const url = process.env.PUBLIC_URL;
     const urlArr = url.split("//");
-    return `https://wwww.${urlArr[1]}`;
+    return `wwww.${urlArr[1]}`;
 }
 
 //Handles fetch request

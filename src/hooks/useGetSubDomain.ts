@@ -10,7 +10,7 @@ export function useGetSubDomain() {
         return host.split(".");
     }, [host]);
 
-    if (host === publicDomain || host === getWWWDomain()) {
+    if (host === publicDomain.split('//')[1] || host === getWWWDomain()) {
         return { isValid: false, subDomain: "" };
     }
 
