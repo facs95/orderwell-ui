@@ -9,7 +9,8 @@ export function useGetSubDomain() {
     const hostArray = useMemo(() => {
         return host.split(".");
     }, [host]);
-
+    console.log('host', host)
+    console.log('function', getWWWDomain())
     if (host === publicDomain.split('//')[1] || host === getWWWDomain()) {
         return { isValid: false, subDomain: "" };
     }
