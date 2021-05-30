@@ -4,7 +4,7 @@ import { LoadableButton } from "../components/Inputs/LoadableButton";
 import { CheckAvailableInput } from "../components/Inputs/CheckAvailableInput";
 import { LabeledInput } from "../components/Inputs/LabeledInput";
 import { createTenantFn } from "../queries/tenant";
-import { redirectToTenant, sleep } from "../utils/helpers";
+import { queryFunction, redirectToTenant, sleep } from "../utils/helpers";
 
 export const CreateTenant = () => {
     const createTenant = useMutation(createTenantFn, {
@@ -31,13 +31,12 @@ export const CreateTenant = () => {
     const handleVerify = async () => {
         try {
             setLoading(true);
-            const res = await fetch(
-                `http://${process.env.REACT_APP_API_BASE_URL}/tenant/valid?companyName=${companyName}`
+            let headers = new Headers();
+            headers.append("Content-Type", "application/json");
+            headers.append("Access-Control-Allow-Origin", "*");
+            const data = await queryFunction(
+                `/tenant/valid?companyName=${companyName}`
             );
-            if (!res.ok) {
-                throw new Error(await res.text());
-            }
-            const data = await res.json();
             await sleep(1000);
             setIsNameValid(data.isValid);
         } catch (err) {

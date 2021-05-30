@@ -17,7 +17,7 @@ export function useGetSubDomain() {
         }
         return { isValid: true, subDomain: "" };
     }
-    if (hostArray.length >= 2) {
+    if (hostArray.length >= 3) {
         return { isValid: true, subDomain: hostArray[0] };
     }
     return { isValid: true, subDomain: "" };
