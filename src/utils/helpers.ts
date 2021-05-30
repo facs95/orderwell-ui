@@ -3,15 +3,18 @@ export function sleep(ms: number) {
 }
 
 export function redirectToPublic() {
-    window.location.href =
-        "https://" + process.env.REACT_APP_UI_BASE_URL ||
-        "http://localhost:3000";
+    window.location.href = process.env.PUBLIC_URL || "http://localhost:3000";
 }
 
 export function redirectToTenant(subDomain: string) {
     window.location.href =
-        `https://${subDomain}.${process.env.REACT_APP_UI_BASE_URL}` ||
-        "http://localhost:3000";
+        `${subDomain}.${process.env.PUBLIC_URL}` || "http://localhost:3000";
+}
+
+export function getWWWDomain() {
+    const url = process.env.PUBLIC_URL;
+    const urlArr = url.split("//");
+    return `https://wwww.${urlArr[1]}`;
 }
 
 //Handles fetch request
@@ -20,10 +23,9 @@ export const queryFunction = async (url: string, token?: string) => {
     if (token) {
         headers.append("Authorization", "Bearer " + token);
         headers.append("Content-Type", "application/json");
-        headers.append("Access-Control-Allow-Origin", "*");
     }
     const response = await fetch(
-        `https://${process.env.REACT_APP_API_BASE_URL}${url}`,
+        `${process.env.REACT_APP_API_BASE_URL}${url}`,
         { headers }
     );
     if (!response.ok) {
