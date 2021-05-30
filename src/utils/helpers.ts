@@ -22,7 +22,7 @@ export const queryFunction = async (url: string, token?: string) => {
         headers.append("Content-Type", "application/json");
     }
     const response = await fetch(
-        `http://${process.env.REACT_APP_API_BASE_URL}${url}`,
+        `https://${process.env.REACT_APP_API_BASE_URL}${url}`,
         { headers }
     );
     if (!response.ok) {
