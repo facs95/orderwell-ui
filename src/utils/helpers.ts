@@ -3,16 +3,16 @@ export function sleep(ms: number) {
 }
 
 export function redirectToPublic() {
-    window.location.href = process.env.PUBLIC_URL || "http://localhost:3000";
+    window.location.href = process.env.REACT_APP_UI_BASE_URL || "http://localhost:3000";
 }
 
 export function redirectToTenant(subDomain: string) {
     window.location.href =
-        `${subDomain}.${process.env.PUBLIC_URL}` || "http://localhost:3000";
+        `${subDomain}.${process.env.REACT_APP_UI_BASE_URL}` || "http://localhost:3000";
 }
 
 export function getWWWDomain() {
-    const url = process.env.PUBLIC_URL;
+    const url = process.env.REACT_APP_UI_BASE_URL || 'http://localhost:3000';
     const urlArr = url.split("//");
     return `www.${urlArr[1]}`;
 }

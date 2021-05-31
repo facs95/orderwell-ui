@@ -3,15 +3,10 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { AuthProvider } from "./auth";
 import { useGetSubDomain } from "./hooks/useGetSubDomain";
 import { TenantRoutes } from "./TenantRoutes";
-import { redirectToPublic } from "./utils/helpers";
 import { CreateTenant } from "./views/CreateTenant";
 
 function App() {
-    const { isValid, subDomain } = useGetSubDomain();
-
-    if (!isValid) {
-        redirectToPublic();
-    }
+    const { subDomain } = useGetSubDomain();
 
     //Its on subdomain so we take them to the tenant routes
     if (subDomain) {
