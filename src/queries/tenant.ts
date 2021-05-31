@@ -23,7 +23,7 @@ export const createTenantFn = (
     if (token) {
         headers.append("Authorization", "Bearer " + token);
     }
-    return fetch(`http://${process.env.REACT_APP_API_BASE_URL}/create-tenant`, {
+    return fetch(`${process.env.REACT_APP_API_BASE_URL}/create-tenant`, {
         headers,
         method: "POST",
         body: JSON.stringify(body),
