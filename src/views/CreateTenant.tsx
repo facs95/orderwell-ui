@@ -9,6 +9,7 @@ import { queryFunction, redirectToTenant, sleep } from "../utils/helpers";
 export const CreateTenant = () => {
     const createTenant = useMutation(createTenantFn, {
         onSuccess: async (data) => {
+            console.log('success')
             const tenant = await data.json();
             redirectToTenant(tenant.oauthId as string);
         },

@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { getWWWDomain } from "../utils/helpers";
 
 //UNHAPPY has a hard coded value for localhost
 //and a bunch of if statements
@@ -10,7 +9,7 @@ export function useGetSubDomain() {
         return host.split(".");
     }, [host]);
 
-    if (host === publicDomain.split("//")[1] || host === getWWWDomain()) {
+    if (host === publicDomain || host === "www." + publicDomain) {
         return { subDomain: "" };
     }
 

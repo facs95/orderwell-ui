@@ -3,19 +3,22 @@ export function sleep(ms: number) {
 }
 
 export function redirectToPublic() {
-    window.location.href = process.env.REACT_APP_UI_BASE_URL || "http://localhost:3000";
+    window.location.href =
+        window.location.protocol + "//" + process.env.REACT_APP_UI_BASE_URL ||
+        "http://localhost:3000";
 }
 
 export function redirectToTenant(subDomain: string) {
     window.location.href =
-        `${subDomain}.${process.env.REACT_APP_UI_BASE_URL}` || "http://localhost:3000";
+        `${window.location.protocol}//${subDomain}.${process.env.REACT_APP_UI_BASE_URL}` ||
+        "http://localhost:3000";
 }
 
-export function getWWWDomain() {
-    const url = process.env.REACT_APP_UI_BASE_URL || 'http://localhost:3000';
-    const urlArr = url.split("//");
-    return `www.${urlArr[1]}`;
-}
+// export function getWWWDomain() {
+//     const url = process.env.REACT_APP_UI_BASE_URL || "http://localhost:3000";
+//     const urlArr = url.split("//");
+//     return `www.${urlArr[1]}`;
+// }
 
 //Handles fetch request
 export const queryFunction = async (url: string, token?: string) => {
